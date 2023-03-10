@@ -30,7 +30,7 @@
 	\maketitle
 	
 	\begin{abstract}
-		For our project we will be tackling the Dining philosophers problem but do it in a language that will be new to us, rust. The rules to solve this is to not let two philosophers have two forks simultaneously, avoid a deadlock and make sure they do not starve, meaning they all must eat. This problem will allow us to not only learn a new language but put into practice concepts from the class. We will be using locks, and threads to be able to solve this problem and have variables that all threads use. For our approach we will have to create an algorithm that can determine the state of a philosopher which are either to think or eat. We will also have to know whenever a philosopher picks up a fork and make sure they do not grab both at once but one at a time. Then finally also have the algorithm allow the philosopher eat once they acquire 2 forks. Once we are done with this project we should be able to learn rust and be able to comfortably code threads in the language to solve complex problems.
+		For our project we will be tackling the Dining Philosophers problem but we will do it in a language that will be new to us, (Rust). The Dining Philosophers problem envisions a round dinner table with N philosophers sitting. However, there are only 5 forks, and the philosophers require two forks to eat. The goal is to create a multi-threaded algorithm, (one thread per philosopher), which can allow the philosophers to recognize when two forks are available, (one to the left and to the right) and begin to eat. The rules to solve this is to not let two philosophers have two forks simultaneously, avoid a deadlock and make sure they do not starve, meaning they all must eat. This problem will allow us to not only learn a new language but put into practice concepts from the class. We will be using locks, and threads to be able to solve this problem and have variables that all threads use. For our approach we will have to create an algorithm that can determine the state of a philosopher which are either to think or eat. We will also have to know whenever a philosopher picks up a fork and make sure they do not grab both at once but one at a time. Then finally also have the algorithm allow the philosopher to eat once they acquire two forks. Once we are done with this project, we should be able to learn rust and be able to comfortably code threads in the language to solve complex problems.
 	\end{abstract}
 	
 	\begin{IEEEkeywords}
@@ -38,31 +38,31 @@
 	\end{IEEEkeywords}
 	
 	\section{Introduction}
-	 The goal of our project is to use concepts we learned in class which involve concurrent objects, mutual exclusion and learn the language RUST. RUST is a coding language ( a systems programming language) that was designed to be safe, fast and allow for concurrency.  It has a user-friendly compiler that with it brings integrated package managers and also prevents crashes in the code. To put it in simpler terms it wont allow the code to run if it sees that it will cause a crash instead it will show in the compiler to the user what changes to make to prevent a crash and allow the code to run. 
+	 What we hope to gain from our project is to use concepts we learned in class which involve concurrent objects, mutual exclusion and learn the language RUST. RUST is a coding language ( a systems programming language) that was designed to be safe, fast and allow for concurrency.  It has a user-friendly compiler that with it brings integrated package managers and also prevents crashes in the code. To put it in simpler terms it wont allow the code to run if it sees that it will cause a crash instead it will show in the compiler to the user what changes to make to prevent a crash and allow the code to run. 
 	 \linebreak
-	 \underline{Advantages of using RUST}
+	 Advantages of using RUST
 	 \begin{enumerate}
 	 	\item Allows for easy and quick debugging as once again it is a fast language.
 	 	\item When compared to other languages it will support complex code better with faster runtime.
 	 	\item It is safer than C++ and Java.
 	 \end{enumerate}
-	 \underline{Disadvantages of using RUST}
+	 Disadvantages of using RUST
 	 \begin{enumerate}
 	 	\item Rust is more complicated than other languages to learn
 	 	\item Due to the learning curve it may take longer to solve a problem in RUST
 	 	\item There isn’t much research on it in case we need help since it is new
 	 	\item There can be memory leaks and RUST and this will affect our runtime to be slower
 	\end{enumerate}
-	 Overall Rust is good at solving concurrency problems which is why we chose to do the Dining philosophers problem for our project as it is a complex concurrency problem. The Dining philosophers problem states that there are a N amount of philosophers/threads around a table that have an infinite appetite and will never be fuel. They all have a fork to their left and to their right and must have both picked up to be able to eat. As stated before they must not be able to pick up both forks at once, they can either think or eat, and they must not starve which is represented by reaching a deadlock.
+	Overall, Rust is good at solving concurrency problems which is why we chose to do the Dining philosophers problem for our project as it is a complex concurrency problem. The Dining Philosophers problem states that there are N number of philosophers/threads around a table that have an infinite appetite and will never be full. They all have a fork to their left and to their right and must have both picked up to be able to eat. As stated before, they must not be able to pick up both forks at once, they can either think or eat, and they must not starve which is represented by reaching a deadlock.
 	 \linebreak
-	 \underline{Common issues of the problem}
+	 Common issues of the problem
 	 \begin{enumerate}
 	 	\item Two philosophers pick up the same fork
 	 	\item One philosopher picks up a fork and another one picks up the only other available fork meaning the philosopher starves (causes a deadlock).
 	 \end{enumerate}
-	 To solve these common issues we will have to use locks to make sure once a thread uses a fork another one cannot which in theory should solve issue number 1. To solve issue number two we will have to design our code so that the other fork available to a philosopher once they pick one up is inaccessible. This will require for the variable storing forks to be accessible by all threads.
+	 To solve these common issues, we will have to use locks to make sure once a thread uses a fork another one cannot which in theory should solve issue number 1. To solve issue number 2, we will have to design our code so that the other fork available to a philosopher once they pick one up is inaccessible. This will require for the variable storing forks to be accessible by all threads.
 	 \linebreak
-	 \underline{How using RUST positively affects this problem}
+	 How using RUST positively affects this problem
 	 \begin{enumerate}
 	 	\item We can share data between the threads using Arc and mutex
 	 	\begin{enumerate}
@@ -73,7 +73,9 @@
 	 	\item RUST can lock data meaning that once a thread/philosopher picks up a fork we can lock it until the philosopher drops the fork which then will make it accessible to other threads.
 
 	\end{enumerate}
-	 
+	 \section{Goal}
+		In our solution, we would prefer to make an algorithm that requires minimal locking. There is a fairly simple solution we could use, where each philosopher in turn is the only one able to eat, and thus guarantees their access to the forks, but this solution allows much less work to be performed over all. It would be best if our solution allowed multiple philosophers to eat at the same time. To accomplish this, we are considering the use of semaphores. In our case, we are considering having an array that represents how many forks are available for each philosopher at any given time. when a philosopher "picks up" their forks, they update the the available forks values for the philosophers to the left and right, and the same goes for when they place their fork down. This will keep philosophers from attempting to pick up forks when the fork is not available. 
+	\linebreak
 	
 	
 \end{document}
